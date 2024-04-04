@@ -41,13 +41,13 @@ const Body = () => {
     
     return listOfRestaurants.length === 0 ? (<Shimmer/>): (
         <div className="body"> 
-            <div className="filter">
-                <div className="search">
-                    <input type="text" className="search-box" value = {searchText} 
+            <div className="flex items-center">
+                <div className="p-4 m-4">
+                    <input type="text" className="border border-solid border-black" value = {searchText} 
                     onChange={(e)=> {
                         setSearchText (e.target.value);
                     }}/>
-                    <button className="search-btn" 
+                    <button className="px-4 py-2 m-4 bg-green-100 rounded-lg" 
                     onClick={()=> {
                        const filteredRestauarnts = listOfRestaurants.filter((res) => 
                         res.info.name.toLowerCase().includes(searchText.toLowerCase()));
@@ -57,16 +57,18 @@ const Body = () => {
                         Search
                     </button>
                 </div>
-                <button className="filter-btn" 
-                onClick={() =>{
-                const filteredList = listOfRestaurants.filter (
-                    (res) => res.info.avgRating > 4.5);
-                    setfilteredlistOfRestaurants (filteredList);
-                }}> 
-                Top Rated Restaurants 
-                </button>
+                <div className="p-4 m-4">
+                    <button className="px-4 py-2 m-4 bg-gray-100 rounded-lg" 
+                    onClick={() =>{
+                    const filteredList = listOfRestaurants.filter (
+                        (res) => res.info.avgRating > 4.5);
+                        setfilteredlistOfRestaurants (filteredList);
+                    }}> 
+                    Top Rated Restaurants 
+                    </button>
+                </div>
             </div>
-            <div className="res-container">{
+            <div className="flex flex-wrap">{
                 filteredlistOfRestaurants.map((resturant) => (
                <Link  key={resturant.info.id} to={"/restaurantmenu/" + resturant.info.id}>
                     <RestaurantCard resData ={resturant}/> 
